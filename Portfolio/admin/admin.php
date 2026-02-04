@@ -5,7 +5,7 @@ date_default_timezone_set('Asia/Kolkata');
 
 // --- AUTHENTICATION & ROUTING ---
 $adminUser = 'admin';
-$adminPass = 'Admin123';
+$adminPass = 'Admin@123';
 $action = $_GET['action'] ?? 'dashboard';
 
 // --- Handle Login Attempt (POST request) ---
@@ -236,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                          $message = "❌ Error: Only PDF files are allowed for the resume.";
                          break;
                     }
-                    $new_filename = "Resume." . $file_extension;
+                    $new_filename = "Santosh_Chowdhury_Resume." . $file_extension;
                     $target_path = $resumeDir . $new_filename;
                     if (move_uploaded_file($_FILES['resume_file']['tmp_name'], $target_path)) {
                         $stmt = $conn->prepare("INSERT INTO resumes (filename, uploaded_at) VALUES (?, NOW())");
@@ -711,7 +711,7 @@ $_SESSION['token'] = bin2hex(random_bytes(32));
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="glass-pane p-8">
                             <h3 class="text-xl font-bold mb-4">Upload New Resume</h3>
-                            <p class="text-sm text-text-secondary mb-4">Uploading a new PDF will replace the existing one and rename it to "Resume.pdf".</p>
+                            <p class="text-sm text-text-secondary mb-4">Uploading a new PDF will replace the existing one and rename it to "Santosh_Chowdhury_Resume.pdf".</p>
                             <form method="post" action="?action=resumes" enctype="multipart/form-data">
                                 <input type="hidden" name="token" value="<?= htmlspecialchars($_SESSION['token']); ?>">
                                 <input type="file" name="resume_file" accept=".pdf" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-cyan-500/10 file:text-cyan-300 hover:file:bg-cyan-500/20" required>
